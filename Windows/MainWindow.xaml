@@ -44,8 +44,8 @@
                   IsReadOnly="True" SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*"/>
-                <DataGridTextColumn Header="Автор" Binding="{Binding Author.FullName}" Width="150"/>
-                <DataGridTextColumn Header="Жанр" Binding="{Binding Genre.Name}" Width="100"/>
+                <DataGridTextColumn Header="Авторы" Binding="{Binding AuthorsDisplay}" Width="200"/>
+                <DataGridTextColumn Header="Жанры" Binding="{Binding GenresDisplay}" Width="180"/>
                 <DataGridTextColumn Header="Год" Binding="{Binding PublishYear}" Width="60"/>
                 <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}" Width="120"/>
                 <DataGridTextColumn Header="В наличии" Binding="{Binding QuantityInStock}" Width="80"/>

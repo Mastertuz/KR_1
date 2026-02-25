@@ -34,15 +34,13 @@ namespace KR_1.Data
 
                 entity.HasIndex(b => b.ISBN).IsUnique();
 
-                entity.HasOne(b => b.Author)
+                entity.HasMany(b => b.Authors)
                     .WithMany(a => a.Books)
-                    .HasForeignKey(b => b.AuthorId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .UsingEntity(j => j.ToTable("BookAuthors"));
 
-                entity.HasOne(b => b.Genre)
+                entity.HasMany(b => b.Genres)
                     .WithMany(g => g.Books)
-                    .HasForeignKey(b => b.GenreId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .UsingEntity(j => j.ToTable("BookGenres"));
             });
 
             // Author

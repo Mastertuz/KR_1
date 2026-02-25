@@ -45,15 +45,15 @@ namespace KR_1.Windows
         private void LoadBooks()
         {
             var query = _context.Books
-                .Include(b => b.Author)
-                .Include(b => b.Genre)
+                .Include(b => b.Authors)
+                .Include(b => b.Genres)
                 .AsQueryable();
 
             if (AuthorFilterComboBox.SelectedValue is int authorId && authorId > 0)
-                query = query.Where(b => b.AuthorId == authorId);
+                query = query.Where(b => b.Authors.Any(a => a.Id == authorId));
 
             if (GenreFilterComboBox.SelectedValue is int genreId && genreId > 0)
-                query = query.Where(b => b.GenreId == genreId);
+                query = query.Where(b => b.Genres.Any(g => g.Id == genreId));
 
             if (!string.IsNullOrWhiteSpace(SearchTextBox.Text))
                 query = query.Where(b => b.Title.Contains(SearchTextBox.Text));

@@ -8,9 +8,11 @@ namespace KR_1.Data
     {
         public static void Initialize(LibraryContext context)
         {
-            // Удаляем старую БД и создаём новую
-            context.Database.EnsureDeleted();
+            // Создаём БД, если её нет
             context.Database.EnsureCreated();
+
+            if (context.Books.Any())
+                return;
 
             // Авторы
             var authors = new[]
@@ -42,36 +44,36 @@ namespace KR_1.Data
             // 15 реальных книг
             var books = new Book[]
             {
-                new Book { Title = "Война и мир", PublishYear = 1869, ISBN = "978-5-17-082650-4", QuantityInStock = 5,
-                    AuthorId = authors[0].Id, GenreId = genres[0].Id },
-                new Book { Title = "Анна Каренина", PublishYear = 1877, ISBN = "978-5-04-088760-2", QuantityInStock = 3,
-                    AuthorId = authors[0].Id, GenreId = genres[0].Id },
-                new Book { Title = "Преступление и наказание", PublishYear = 1866, ISBN = "978-5-17-098961-2", QuantityInStock = 7,
-                    AuthorId = authors[1].Id, GenreId = genres[0].Id },
-                new Book { Title = "Идиот", PublishYear = 1869, ISBN = "978-5-17-113114-2", QuantityInStock = 2,
-                    AuthorId = authors[1].Id, GenreId = genres[0].Id },
-                new Book { Title = "Братья Карамазовы", PublishYear = 1880, ISBN = "978-5-04-101532-9", QuantityInStock = 4,
-                    AuthorId = authors[1].Id, GenreId = genres[0].Id },
-                new Book { Title = "Вишнёвый сад", PublishYear = 1904, ISBN = "978-5-17-119319-5", QuantityInStock = 6,
-                    AuthorId = authors[2].Id, GenreId = genres[2].Id },
-                new Book { Title = "Чайка", PublishYear = 1896, ISBN = "978-5-17-119312-6", QuantityInStock = 3,
-                    AuthorId = authors[2].Id, GenreId = genres[2].Id },
-                new Book { Title = "Евгений Онегин", PublishYear = 1833, ISBN = "978-5-17-098962-9", QuantityInStock = 8,
-                    AuthorId = authors[3].Id, GenreId = genres[1].Id },
-                new Book { Title = "Капитанская дочка", PublishYear = 1836, ISBN = "978-5-17-108299-4", QuantityInStock = 5,
-                    AuthorId = authors[3].Id, GenreId = genres[5].Id },
-                new Book { Title = "Мёртвые души", PublishYear = 1842, ISBN = "978-5-17-117544-3", QuantityInStock = 4,
-                    AuthorId = authors[4].Id, GenreId = genres[0].Id },
-                new Book { Title = "Ревизор", PublishYear = 1836, ISBN = "978-5-17-117543-6", QuantityInStock = 7,
-                    AuthorId = authors[4].Id, GenreId = genres[2].Id },
-                new Book { Title = "Отцы и дети", PublishYear = 1862, ISBN = "978-5-17-108532-2", QuantityInStock = 5,
-                    AuthorId = authors[5].Id, GenreId = genres[0].Id },
-                new Book { Title = "Мастер и Маргарита", PublishYear = 1967, ISBN = "978-5-17-104739-9", QuantityInStock = 9,
-                    AuthorId = authors[6].Id, GenreId = genres[3].Id },
-                new Book { Title = "Собачье сердце", PublishYear = 1925, ISBN = "978-5-17-104738-2", QuantityInStock = 6,
-                    AuthorId = authors[6].Id, GenreId = genres[3].Id },
-                new Book { Title = "Записки охотника", PublishYear = 1852, ISBN = "978-5-17-108533-9", QuantityInStock = 4,
-                    AuthorId = authors[5].Id, GenreId = genres[5].Id }
+                new Book { Title = "Война и мир", PublishYear = 1869, ISBN = "9785170826504", QuantityInStock = 5,
+                    Authors = new[] { authors[0] }, Genres = new[] { genres[0] } },
+                new Book { Title = "Анна Каренина", PublishYear = 1877, ISBN = "9785040887602", QuantityInStock = 3,
+                    Authors = new[] { authors[0] }, Genres = new[] { genres[0] } },
+                new Book { Title = "Преступление и наказание", PublishYear = 1866, ISBN = "9785170989612", QuantityInStock = 7,
+                    Authors = new[] { authors[1] }, Genres = new[] { genres[0] } },
+                new Book { Title = "Идиот", PublishYear = 1869, ISBN = "9785171131142", QuantityInStock = 2,
+                    Authors = new[] { authors[1] }, Genres = new[] { genres[0] } },
+                new Book { Title = "Братья Карамазовы", PublishYear = 1880, ISBN = "9785041015329", QuantityInStock = 4,
+                    Authors = new[] { authors[1] }, Genres = new[] { genres[0] } },
+                new Book { Title = "Вишнёвый сад", PublishYear = 1904, ISBN = "9785171193195", QuantityInStock = 6,
+                    Authors = new[] { authors[2] }, Genres = new[] { genres[2] } },
+                new Book { Title = "Чайка", PublishYear = 1896, ISBN = "9785171193126", QuantityInStock = 3,
+                    Authors = new[] { authors[2] }, Genres = new[] { genres[2] } },
+                new Book { Title = "Евгений Онегин", PublishYear = 1833, ISBN = "9785170989629", QuantityInStock = 8,
+                    Authors = new[] { authors[3] }, Genres = new[] { genres[1] } },
+                new Book { Title = "Капитанская дочка", PublishYear = 1836, ISBN = "9785171082994", QuantityInStock = 5,
+                    Authors = new[] { authors[3] }, Genres = new[] { genres[5] } },
+                new Book { Title = "Мёртвые души", PublishYear = 1842, ISBN = "9785171175443", QuantityInStock = 4,
+                    Authors = new[] { authors[4] }, Genres = new[] { genres[0] } },
+                new Book { Title = "Ревизор", PublishYear = 1836, ISBN = "9785171175436", QuantityInStock = 7,
+                    Authors = new[] { authors[4] }, Genres = new[] { genres[2] } },
+                new Book { Title = "Отцы и дети", PublishYear = 1862, ISBN = "9785171085322", QuantityInStock = 5,
+                    Authors = new[] { authors[5] }, Genres = new[] { genres[0] } },
+                new Book { Title = "Мастер и Маргарита", PublishYear = 1967, ISBN = "9785171047399", QuantityInStock = 9,
+                    Authors = new[] { authors[6] }, Genres = new[] { genres[3] } },
+                new Book { Title = "Собачье сердце", PublishYear = 1925, ISBN = "9785171047382", QuantityInStock = 6,
+                    Authors = new[] { authors[6] }, Genres = new[] { genres[3] } },
+                new Book { Title = "Записки охотника", PublishYear = 1852, ISBN = "9785171085339", QuantityInStock = 4,
+                    Authors = new[] { authors[5] }, Genres = new[] { genres[5] } }
             };
 
             context.Books.AddRange(books);
